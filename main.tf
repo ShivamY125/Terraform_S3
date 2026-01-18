@@ -151,3 +151,17 @@ resource "aws_s3_bucket_logging" "example" {
 
    target_prefix = "log/"
 }
+
+
+# Step 8: Object Locking in S3.
+
+resource "aws_s3_bucket_object_lock_configuration" "example" {
+   bucket = aws_s3_bucket.test_bucket.id
+
+   rule{
+    default_retention {    # it is the period for which object will be locked it cant be deleted for the days it is locked.
+      mode = "COMPLIANCE"
+      days = 1
+    }
+   }
+}
