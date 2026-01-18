@@ -134,3 +134,20 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
     depends_on = [ aws_s3_bucket_versioning.test_bucket_versioning ]
 
 }
+
+# Step 7: Bucket Logging.
+
+resource "aws_s3_bucket" "logg_bucket" {
+   bucket = format("%s-%s", var.upload_bucket_name, random_id.bucket_id.hex)
+   tags = {
+     Name = "Log Bucket"
+     Enviornment = "Dev"
+   }
+}
+
+resource "aws_s3_bucket_logging" "example" {
+   bucket = aws_s3_bucket.test_bucket.id
+   target_bucket = aws_s3_bucket.logg_bucket.id
+
+   target_prefix = "log/"
+}

@@ -7,5 +7,5 @@ variable "bucket_name" {
 variable "upload_bucket_name" {
    type = string
    description = "Upload Bucket"
-   default = "upload-bucket-s3-"
+   default = "upload-bucket-s3"
 }
